@@ -15,14 +15,6 @@ Este es el sitio web oficial de **Alcalá Deportivo Rs.**, un equipo de fútbol 
 - CSS3 (Variables, Grid, Flexbox, Animaciones)
 - JavaScript (Interacciones, Navegación móvil, Lightbox)
 
-## Instalación Local
-
-1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-   ```
-2. Abre el archivo `index.html` en tu navegador.
-
 ## Créditos
 
 Desarrollado para Real Sociedad Deportiva Alcala.
