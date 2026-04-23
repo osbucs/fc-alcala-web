@@ -186,6 +186,29 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:60px
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+/* SWIPER TEAM GALLERY */
+#team-gallery{background:var(--bg);overflow:hidden;border-top:1px solid var(--border)}
+.galeria-info{text-align:center;margin-bottom:40px;color:var(--text)}
+.galeria-info p.galeria-subtitulo{display:block;color:var(--accent2);font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:14px;transition:opacity .3s ease}
+.galeria-titulo-torneo span{color:var(--accent)}
+.galeria-cats{display:block;font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,18px);font-weight:600;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:10px}
+.galeria-titulo-torneo{line-height:1;margin-bottom:0}
+.swiper-equipo{width:100%;padding-bottom:56px}
+.swiper-equipo .swiper-slide{width:500px;height:340px;opacity:.38;transition:opacity .35s ease,transform .35s ease;cursor:zoom-in;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border)}
+.swiper-equipo .swiper-slide-active{opacity:1;transform:scale(1.04);box-shadow:0 24px 64px rgba(0,0,0,.7);border:2px solid var(--accent2)}
+.swiper-equipo .swiper-slide img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.swiper-equipo .swiper-slide-active img{transform:scale(1.03)}
+.swiper-equipo .swiper-button-next,.swiper-equipo .swiper-button-prev{color:var(--accent2);transition:color .2s}
+.swiper-equipo .swiper-button-next:hover,.swiper-equipo .swiper-button-prev:hover{color:var(--text)}
+.swiper-equipo .swiper-pagination-bullet{background:var(--muted);opacity:1;transition:background .2s}
+.swiper-equipo .swiper-pagination-bullet-active{background:var(--accent2)}
+/* Team Lightbox — scoped with #mi-lightbox to avoid conflicts with existing #lightbox */
+#mi-lightbox{display:none;position:fixed;z-index:10000;padding-top:50px;left:0;top:0;width:100%;height:100%;background:rgba(12,8,8,.95);backdrop-filter:blur(8px)}
+#mi-lightbox .lightbox-contenido{margin:auto;display:block;max-width:80%;max-height:80vh;border-radius:var(--radius-sm);box-shadow:0 0 60px rgba(220,38,38,.25)}
+#mi-lightbox #lightbox-texto{margin:auto;display:block;width:80%;text-align:center;color:var(--text);padding:15px 0;font-size:1rem;font-weight:500;letter-spacing:.5px}
+#mi-lightbox .lightbox-cerrar{position:absolute;top:30px;right:40px;color:var(--accent2);font-size:40px;font-weight:700;cursor:pointer;transition:color .2s;line-height:1;background:none;border:none}
+#mi-lightbox .lightbox-cerrar:hover{color:var(--text)}
+
 /* RESPONSIVE */
 @media(max-width:1024px){
   .categories-grid{grid-template-columns:repeat(2,1fr)}

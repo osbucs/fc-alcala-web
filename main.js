@@ -107,3 +107,73 @@ window.addEventListener('scroll', () => {
     heroBg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.15}px)`;
   }
 });
+
+// ── Swiper Team Gallery ────────────────────────────────────────
+(function initSwiperGallery() {
+  const tituloDinamico = document.getElementById('titulo-dinamico');
+  if (!tituloDinamico) return;
+
+  const swiper = new Swiper('.swiper-equipo', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    loop: true,
+    coverflowEffect: {
+      rotate: 0,
+      stretch: 0,
+      depth: 120,
+      modifier: 1.5,
+      slideShadows: false,
+    },
+    navigation: {
+      nextEl: '.swiper-equipo .swiper-button-next',
+      prevEl: '.swiper-equipo .swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-equipo .swiper-pagination',
+      clickable: true,
+    },
+    on: {
+      slideChangeTransitionStart() {
+        const activeSlide = this.slides[this.activeIndex];
+        const nuevoTitulo = activeSlide?.getAttribute('data-titulo');
+        if (!nuevoTitulo || !tituloDinamico) return;
+        tituloDinamico.style.opacity = '0';
+        setTimeout(() => {
+          tituloDinamico.textContent = nuevoTitulo;
+          tituloDinamico.style.opacity = '1';
+        }, 150);
+      },
+    },
+  });
+
+  // Team Lightbox
+  const miLightbox  = document.getElementById('mi-lightbox');
+  const imgAmpliada = document.getElementById('img-ampliada');
+  const textoLb     = document.getElementById('lightbox-texto');
+  const btnCerrar   = document.getElementById('btn-cerrar-lb');
+
+  document.querySelectorAll('.swiper-equipo .swiper-slide').forEach(slide => {
+    slide.addEventListener('click', function () {
+      if (!this.classList.contains('swiper-slide-active')) return;
+      imgAmpliada.src = this.querySelector('img').src;
+      textoLb.textContent = this.getAttribute('data-titulo') || '';
+      miLightbox.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function cerrarLightboxEquipo() {
+    miLightbox.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  btnCerrar.addEventListener('click', cerrarLightboxEquipo);
+  miLightbox.addEventListener('click', e => {
+    if (e.target !== imgAmpliada) cerrarLightboxEquipo();
+  });
+  document.addEventListener('keydown', e => {
+    if (miLightbox.style.display === 'block' && e.key === 'Escape') cerrarLightboxEquipo();
+  });
+})();
