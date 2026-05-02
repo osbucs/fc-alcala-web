@@ -60,29 +60,32 @@ nav a:hover{color:var(--text)}
 }
 
 /*
-  Crossfade logic — 3 slides, 9s each (7s visible + 2s fade-out at end)
-  Total cycle = 27s
-  Slide 1: visible 0-7s, fades out 7-9s, hidden 9-25s, fades in 25-27s
-  Slide 2: hidden 0-7s, fades in 7-9s, visible 9-16s, fades out 16-18s, hidden 18-27s
-  Slide 3: hidden 0-16s, fades in 16-18s, visible 18-25s, fades out 25-27s
+  Crossfade logic — 4 slides, 9s each (7s visible + 2s fade-out at end)
+  Total cycle = 36s
 */
 .slide-1{
   opacity:1;
   animation:
-    kenburns-1 27s ease-in-out infinite,
-    fade-slide-1 27s ease-in-out infinite
+    kenburns-1 36s ease-in-out infinite,
+    fade-slide-1 36s ease-in-out infinite
 }
 .slide-2{
   opacity:0;
   animation:
-    kenburns-2 27s ease-in-out infinite,
-    fade-slide-2 27s ease-in-out infinite
+    kenburns-2 36s ease-in-out infinite,
+    fade-slide-2 36s ease-in-out infinite
 }
 .slide-3{
   opacity:0;
   animation:
-    kenburns-3 27s ease-in-out infinite,
-    fade-slide-3 27s ease-in-out infinite
+    kenburns-3 36s ease-in-out infinite,
+    fade-slide-3 36s ease-in-out infinite
+}
+.slide-4{
+  opacity:0;
+  animation:
+    kenburns-4 36s ease-in-out infinite,
+    fade-slide-4 36s ease-in-out infinite
 }
 
 /* Ken Burns — slide 1: zoom in + drift left */
@@ -103,29 +106,43 @@ nav a:hover{color:var(--text)}
   50% {transform:scale(1.06) translate(0,-0.6%)}
   100%{transform:scale(1.0)  translate(0,0)}
 }
+/* Ken Burns — slide 4: zoom in + drift down/right */
+@keyframes kenburns-4{
+  0%  {transform:scale(1.06) translate(0.4%,0.6%)}
+  50% {transform:scale(1.0)  translate(0,0)}
+  100%{transform:scale(1.06) translate(0.4%,0.6%)}
+}
 
-/* Fade animations — percentage based on 27s cycle */
-@keyframes fade-slide-1{
-   0%    {opacity:1}          /* visible    */
-  25.93% {opacity:1}          /* start fade ~7s */
-  33.33% {opacity:0}          /* fully hidden ~9s */
-  92.59% {opacity:0}          /* start re-appear ~25s */
-  100%   {opacity:1}          /* back to visible ~27s */
+/* Fade animations — percentage based on 36s cycle */
+@keyframes fade-slide-1 {
+    0%     {opacity:1}
+   19.44%  {opacity:1}   /* 7s */
+   25%     {opacity:0}   /* 9s */
+   94.44%  {opacity:0}   /* 34s */
+  100%     {opacity:1}   /* 36s */
 }
-@keyframes fade-slide-2{
-   0%    {opacity:0}          /* hidden     */
-  25.93% {opacity:0}          /* start fade in ~7s */
-  33.33% {opacity:1}          /* fully visible ~9s */
-  59.26% {opacity:1}          /* start fade out ~16s */
-  66.67% {opacity:0}          /* fully hidden ~18s */
-  100%   {opacity:0}          /* back to hidden ~27s */
+@keyframes fade-slide-2 {
+    0%     {opacity:0}
+   19.44%  {opacity:0}   /* 7s */
+   25%     {opacity:1}   /* 9s */
+   44.44%  {opacity:1}   /* 16s */
+   50%     {opacity:0}   /* 18s */
+  100%     {opacity:0}
 }
-@keyframes fade-slide-3{
-   0%    {opacity:0}          /* hidden     */
-  59.26% {opacity:0}          /* start fade in ~16s */
-  66.67% {opacity:1}          /* fully visible ~18s */
-  92.59% {opacity:1}          /* start fade out ~25s */
-  100%   {opacity:0}          /* fully hidden ~27s */
+@keyframes fade-slide-3 {
+    0%     {opacity:0}
+   44.44%  {opacity:0}   /* 16s */
+   50%     {opacity:1}   /* 18s */
+   69.44%  {opacity:1}   /* 25s */
+   75%     {opacity:0}   /* 27s */
+  100%     {opacity:0}
+}
+@keyframes fade-slide-4 {
+    0%     {opacity:0}
+   69.44%  {opacity:0}   /* 25s */
+   75%     {opacity:1}   /* 27s */
+   94.44%  {opacity:1}   /* 34s */
+  100%     {opacity:0}   /* 36s */
 }
 
 

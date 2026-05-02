@@ -101,10 +101,10 @@ document.querySelectorAll('.faq-question').forEach(q => {
 });
 
 // ── Hero parallax ──────────────────────────────────────────────
-const heroBg = document.querySelector('.hero-bg');
+const heroSlideshow = document.querySelector('.hero-slideshow');
 window.addEventListener('scroll', () => {
-  if (window.scrollY < window.innerHeight) {
-    heroBg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.15}px)`;
+  if (heroSlideshow && window.scrollY < window.innerHeight) {
+    heroSlideshow.style.transform = `translateY(${window.scrollY * 0.15}px)`;
   }
 });
 
