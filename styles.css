@@ -41,30 +41,100 @@ nav a:hover{color:var(--text)}
 /* HERO — Cinematic Treatment */
 #hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;overflow:hidden;padding:0}
 
-/* Background image — maximised sharpness */
-.hero-bg{
+/* Slideshow container — covers full hero */
+.hero-slideshow{
   position:absolute;inset:0;
-  background:url('assets/hero_new.png?v=3') center center/cover no-repeat;
-  image-rendering:-webkit-optimize-contrast;
-  image-rendering:crisp-edges;
-  image-rendering:high-quality;
-  filter:saturate(1.2) contrast(1.1) brightness(1.05);
-  animation:hero-kenburns 30s ease-in-out infinite alternate;
-  will-change:transform;
-  backface-visibility:hidden;
-  transform:translateZ(0)
-}
-@keyframes hero-kenburns{
-  0%{transform:scale(1.0) translate(0,0)}
-  100%{transform:scale(1.06) translate(-0.8%,-0.5%)}
+  z-index:0;
+  overflow:hidden
 }
 
-/* Multi-layer overlay: vignette + color grade + depth — lightened to show more image */
-.hero-overlay{
+/* Base slide styles */
+.hero-slide{
   position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center center;
+  filter:saturate(1.15) contrast(1.08) brightness(1.0);
+  will-change:transform,opacity;
+  backface-visibility:hidden
+}
+
+/*
+  Crossfade logic — 3 slides, 9s each (7s visible + 2s fade-out at end)
+  Total cycle = 27s
+  Slide 1: visible 0-7s, fades out 7-9s, hidden 9-25s, fades in 25-27s
+  Slide 2: hidden 0-7s, fades in 7-9s, visible 9-16s, fades out 16-18s, hidden 18-27s
+  Slide 3: hidden 0-16s, fades in 16-18s, visible 18-25s, fades out 25-27s
+*/
+.slide-1{
+  opacity:1;
+  animation:
+    kenburns-1 27s ease-in-out infinite,
+    fade-slide-1 27s ease-in-out infinite
+}
+.slide-2{
+  opacity:0;
+  animation:
+    kenburns-2 27s ease-in-out infinite,
+    fade-slide-2 27s ease-in-out infinite
+}
+.slide-3{
+  opacity:0;
+  animation:
+    kenburns-3 27s ease-in-out infinite,
+    fade-slide-3 27s ease-in-out infinite
+}
+
+/* Ken Burns — slide 1: zoom in + drift left */
+@keyframes kenburns-1{
+  0%  {transform:scale(1.0)  translate(0,0)}
+  50% {transform:scale(1.06) translate(-0.8%,-0.4%)}
+  100%{transform:scale(1.0)  translate(0,0)}
+}
+/* Ken Burns — slide 2: zoom in + drift right */
+@keyframes kenburns-2{
+  0%  {transform:scale(1.06) translate(0.8%,0.4%)}
+  50% {transform:scale(1.0)  translate(0,0)}
+  100%{transform:scale(1.06) translate(0.8%,0.4%)}
+}
+/* Ken Burns — slide 3: zoom in + drift up */
+@keyframes kenburns-3{
+  0%  {transform:scale(1.0)  translate(0,0)}
+  50% {transform:scale(1.06) translate(0,-0.6%)}
+  100%{transform:scale(1.0)  translate(0,0)}
+}
+
+/* Fade animations — percentage based on 27s cycle */
+@keyframes fade-slide-1{
+   0%    {opacity:1}          /* visible    */
+  25.93% {opacity:1}          /* start fade ~7s */
+  33.33% {opacity:0}          /* fully hidden ~9s */
+  92.59% {opacity:0}          /* start re-appear ~25s */
+  100%   {opacity:1}          /* back to visible ~27s */
+}
+@keyframes fade-slide-2{
+   0%    {opacity:0}          /* hidden     */
+  25.93% {opacity:0}          /* start fade in ~7s */
+  33.33% {opacity:1}          /* fully visible ~9s */
+  59.26% {opacity:1}          /* start fade out ~16s */
+  66.67% {opacity:0}          /* fully hidden ~18s */
+  100%   {opacity:0}          /* back to hidden ~27s */
+}
+@keyframes fade-slide-3{
+   0%    {opacity:0}          /* hidden     */
+  59.26% {opacity:0}          /* start fade in ~16s */
+  66.67% {opacity:1}          /* fully visible ~18s */
+  92.59% {opacity:1}          /* start fade out ~25s */
+  100%   {opacity:0}          /* fully hidden ~27s */
+}
+
+
+/* Multi-layer overlay: vignette + cinematic dark grade */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
   background:
-    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(12,8,8,.45) 100%),
-    linear-gradient(180deg, rgba(12,8,8,.4) 0%, rgba(12,8,8,.05) 35%, rgba(140,20,20,.08) 60%, rgba(12,8,8,.85) 100%);
+    radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(12,8,8,.55) 100%),
+    linear-gradient(180deg, rgba(12,8,8,.55) 0%, rgba(12,8,8,.1) 30%, rgba(120,15,15,.12) 65%, rgba(12,8,8,.9) 100%);
 }
 
 /* Film grain noise — animated CSS pattern */
@@ -74,7 +144,7 @@ nav a:hover{color:var(--text)}
   width:200%;height:200%;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
   background-size:128px 128px;
-  opacity:.35;
+  opacity:.3;
   animation:hero-grain 0.5s steps(3) infinite;
   pointer-events:none;
   mix-blend-mode:overlay;
@@ -113,7 +183,7 @@ nav a:hover{color:var(--text)}
 .btn-primary:hover{background:#EF4444;transform:translateY(-2px);box-shadow:0 12px 40px rgba(220,38,38,.4)}
 .btn-outline{background:rgba(255,255,255,.06);color:var(--text);border:2px solid rgba(240,237,237,.25);backdrop-filter:blur(6px)}
 .btn-outline:hover{border-color:var(--text);background:rgba(255,255,255,.1)}
-.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.75rem;letter-spacing:2px;text-transform:uppercase}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;z-index:2}
 .scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scroll-anim 2s infinite}
 @keyframes scroll-anim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
