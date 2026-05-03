@@ -493,8 +493,9 @@ nav a.nav-active { color: var(--accent) !important; }
 /* ── BODY LAYOUT ──────────────────────────────────────────── */
 .op-kit-body {
   display: flex;
-  gap: 80px;
-  align-items: flex-start;
+  gap: 60px; /* Reduced gap from 80px */
+  align-items: center; /* Center align instead of flex-start to balance heights */
+  justify-content: center; /* Center horizontally if max-width leaves space */
 }
 
 /* ── KIT VISUAL (Images) ──────────────────────────────────── */
@@ -542,8 +543,7 @@ nav a.nav-active { color: var(--accent) !important; }
 .op-kit-figure::before {
   content: '';
   position: absolute;
-  inset: -6px;
-  inset-block-end: 18px;
+  inset: -12px; /* Even padding around the figure */
   border-radius: 12px;
   background: linear-gradient(
     160deg,
@@ -601,7 +601,8 @@ nav a.nav-active { color: var(--accent) !important; }
 
 /* ── PRICE TABLE ──────────────────────────────────────────── */
 .op-kit-prices {
-  flex: 1;
+  flex: 0 1 500px; /* Instead of flex: 1, limit the max width of the price table */
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -858,6 +859,39 @@ nav a.nav-active { color: var(--accent) !important; }
   .op-kit-img { width: 140px; }
   .op-kit-row { padding: 12px 14px; }
   .op-kit-zone-num { width: 26px; height: 26px; font-size: 12px; }
+}
+
+/* ── ALL KITS — Normalize image heights (equal containers) ── */
+#equipacion-zonas .op-kit-figure,
+#segunda-equipacion .op-kit-figure,
+#chandal-polo-paseo .op-kit-figure {
+  width: 200px;
+}
+#equipacion-zonas .op-kit-img,
+#segunda-equipacion .op-kit-img,
+#chandal-polo-paseo .op-kit-img {
+  width: 100%;
+  height: 300px;
+  padding: 10px; /* Safe space to prevent overflow */
+  object-fit: contain;
+}
+@media(max-width: 1100px) {
+  #equipacion-zonas .op-kit-figure,
+  #segunda-equipacion .op-kit-figure,
+  #chandal-polo-paseo .op-kit-figure { width: 170px; }
+
+  #equipacion-zonas .op-kit-img,
+  #segunda-equipacion .op-kit-img,
+  #chandal-polo-paseo .op-kit-img { height: 260px; }
+}
+@media(max-width: 480px) {
+  #equipacion-zonas .op-kit-figure,
+  #segunda-equipacion .op-kit-figure,
+  #chandal-polo-paseo .op-kit-figure { width: 130px; }
+
+  #equipacion-zonas .op-kit-img,
+  #segunda-equipacion .op-kit-img,
+  #chandal-polo-paseo .op-kit-img { height: 200px; }
 }
 
 /* ── REDUCE MOTION ───────────────────────────────────────── */
