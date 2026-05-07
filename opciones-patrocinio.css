@@ -484,8 +484,9 @@ nav a.nav-active {
   overflow: hidden;
 }
 
-/* Alternating section — segunda equipación gets surface bg */
-#segunda-equipacion {
+/* Alternating section backgrounds (odd = var(--bg), even = var(--surface)) */
+#segunda-equipacion,
+#sudadera-entrenamiento {
   background: var(--surface);
 }
 
@@ -513,7 +514,9 @@ nav a.nav-active {
   will-change: opacity;
 }
 
-#segunda-equipacion::after {
+#segunda-equipacion::after,
+#chandal-polo-paseo::after,
+#sudadera-entrenamiento::after {
   left: auto;
   right: -160px;
 }
