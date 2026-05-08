@@ -481,7 +481,39 @@ nav a.nav-active {
   background: var(--bg);
   position: relative;
   padding: 110px 0;
-  overflow: hidden;
+  /* Removed overflow: hidden so shadows/glows can extend if needed, 
+     but kept to contain the background gradient fades */
+}
+
+/* Since sections alternate between var(--bg) and var(--surface), 
+   the transitions look harsh. We'll add pseudo-element gradients to the 
+   lighter var(--surface) sections to fade them into the darker var(--bg) sections. */
+   
+/* Only apply these blend fades to the alternate sections */
+#segunda-equipacion::before,
+#sudadera-entrenamiento::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(180deg, var(--bg) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+#segunda-equipacion::after,
+#sudadera-entrenamiento::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(0deg, var(--bg) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Alternating section backgrounds (odd = var(--bg), even = var(--surface)) */
@@ -491,7 +523,7 @@ nav a.nav-active {
 }
 
 /* dot grid */
-.op-kit-section::before {
+.op-kit-section .op-kit-inner::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -499,10 +531,11 @@ nav a.nav-active {
   background-size: 28px 28px;
   pointer-events: none;
   opacity: .7;
+  z-index: -1;
 }
 
 /* corner glow — mirrors which side the images are on */
-.op-kit-section::after {
+.op-kit-section .op-kit-inner::after {
   content: '';
   position: absolute;
   top: -160px;
@@ -512,46 +545,17 @@ nav a.nav-active {
   background: radial-gradient(circle, rgba(220, 38, 38, .14) 0%, transparent 65%);
   pointer-events: none;
   will-change: opacity;
+  z-index: -1;
 }
 
-#segunda-equipacion::after,
-#chandal-polo-paseo::after,
-#sudadera-entrenamiento::after {
+#segunda-equipacion .op-kit-inner::after,
+#chandal-polo-paseo .op-kit-inner::after,
+#sudadera-entrenamiento .op-kit-inner::after {
   left: auto;
   right: -160px;
 }
 
-/* ── DIAGONAL DIVIDER between sections ───────────────────── */
-.op-kit-divider {
-  position: relative;
-  height: 64px;
-  overflow: hidden;
-  background: var(--bg);
-  z-index: 3;
-}
 
-.op-kit-divider::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--surface);
-  clip-path: polygon(0 100%, 100% 0, 100% 100%);
-}
-
-.op-kit-divider::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(220, 38, 38, .5) 40%,
-      rgba(220, 38, 38, .8) 50%,
-      rgba(220, 38, 38, .5) 60%,
-      transparent 100%);
-}
 
 .op-kit-inner {
   position: relative;
@@ -1075,6 +1079,765 @@ nav a.nav-active {
 
   .op-kit-row,
   .op-kit-figure {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ================================================================
+   LONAS PUBLICITARIAS — Tarifa por Temporada
+   ================================================================ */
+
+.op-lonas-section {
+  background: var(--bg);
+  position: relative;
+  padding: 110px 0 40px;
+  overflow: hidden;
+}
+
+/* ── Background image layer ─────────────────────────────────── */
+.op-lonas-bg {
+  position: absolute;
+  inset: 0;
+  background: url('assets/_DSC1120.jpg') center / cover no-repeat;
+  filter: saturate(0.7) contrast(1.1) brightness(0.55);
+  animation: hero-kenburns 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* ── Dark + red gradient overlay ───────────────────────────── */
+.op-lonas-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 8, 8, 1.00)  0%,    /* opaco total — funde con sección anterior */
+      rgba(12, 8, 8, 0.90) 10%,
+      rgba(80, 10, 10, 0.50) 42%,  /* tinte carmesí en centro */
+      rgba(12, 8, 8, 0.90) 85%,
+      rgba(12, 8, 8, 1.00) 100%    /* opaco total — funde con footer */
+    ),
+    linear-gradient(
+      90deg,
+      rgba(12, 8, 8, 0.70) 0%,
+      transparent 50%,
+      rgba(12, 8, 8, 0.70) 100%
+    );
+}
+
+/* Film grain on overlay */
+.op-lonas-overlay::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  opacity: .18;
+  animation: hero-grain 0.5s steps(3) infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Dot-grid background (same as kit sections) */
+.op-lonas-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(220, 38, 38, .10) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: .5;
+  z-index: 1;
+}
+
+/* Ambient corner glow — bottom-right */
+.op-lonas-section::after {
+  content: '';
+  position: absolute;
+  bottom: -160px;
+  right: -160px;
+  width: 720px;
+  height: 720px;
+  background: radial-gradient(circle, rgba(220, 38, 38, .18) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Diagonal stripe texture overlay */
+.op-lonas-section .op-lonas-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    rgba(220, 38, 38, .022) 40px,
+    rgba(220, 38, 38, .022) 41px
+  );
+  pointer-events: none;
+}
+
+.op-lonas-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+/* ── LONAS GRID ─────────────────────────────────────────────── */
+.op-lonas-grid {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+/* ── INDIVIDUAL LONA CARD ────────────────────────────────────── */
+.op-lona-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  cursor: default;
+  transition: transform .4s cubic-bezier(.22, .68, 0, 1.2);
+}
+
+.op-lona-card:hover {
+  transform: translateY(-8px);
+}
+
+/* Accent bar at the bottom of each card */
+.op-lona-bar {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  border-radius: 2px;
+  transition: transform .4s cubic-bezier(.22, .68, 0, 1.2);
+}
+
+.op-lona-card:hover .op-lona-bar {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ── LONA SIZE TAG (top label) ────────────────────────────────── */
+.op-lona-tag {
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  position: relative;
+}
+
+.op-lona-tag::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, .4), transparent);
+  margin-top: 6px;
+  opacity: .6;
+}
+
+/* ── LONA VISUAL (the rectangle representing the banner) ─────── */
+.op-lona-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(220, 38, 38, .35);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .02);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+  overflow: hidden;
+}
+
+/* Corner accent marks */
+.op-lona-visual::before,
+.op-lona-visual::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent);
+  border-style: solid;
+  opacity: .5;
+  transition: opacity .35s;
+}
+
+.op-lona-visual::before {
+  top: 6px;
+  left: 6px;
+  border-width: 2px 0 0 2px;
+  border-radius: 2px 0 0 0;
+}
+
+.op-lona-visual::after {
+  bottom: 6px;
+  right: 6px;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 2px 0;
+}
+
+.op-lona-card:hover .op-lona-visual {
+  border-color: rgba(220, 38, 38, .8);
+  background: rgba(220, 38, 38, .06);
+  box-shadow:
+    0 8px 48px rgba(0, 0, 0, .5),
+    0 0 28px rgba(220, 38, 38, .18),
+    inset 0 0 20px rgba(220, 38, 38, .04);
+}
+
+.op-lona-card:hover .op-lona-visual::before,
+.op-lona-card:hover .op-lona-visual::after {
+  opacity: 1;
+}
+
+/* Diagonal hatch lines inside the rectangle (like the reference image) */
+.op-lona-visual .op-lona-dim {
+  position: relative;
+  z-index: 1;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-shadow: 0 0 16px rgba(220, 38, 38, .5);
+  transition: text-shadow .35s;
+}
+
+.op-lona-card:hover .op-lona-dim {
+  text-shadow: 0 0 28px rgba(220, 38, 38, .9);
+}
+
+/* Inner hatch overlay */
+.op-lona-visual::before {
+  content: '';
+  inset: 0;
+  width: auto;
+  height: auto;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 8px,
+    rgba(220, 38, 38, .04) 8px,
+    rgba(220, 38, 38, .04) 9px
+  );
+  border: none;
+  border-radius: 0;
+  opacity: 1;
+}
+
+.op-lona-visual::after {
+  content: '';
+  inset: 0;
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+}
+
+/* Re-add corner marks as child pseudo elements via the card */
+.op-lona-card::before,
+.op-lona-card::after {
+  display: none;
+}
+
+/* Corner marks — use the visual wrapper approach with box shadows */
+.op-lona-visual {
+  /* Top-left corner mark via outline-offset trick */
+  outline: 1.5px solid transparent;
+}
+
+/* ── LONA SIZES (width × height proportional rectangles) ────── */
+/* 2m×1m — small landscape */
+.op-lona-s {
+  width: 120px;
+  height: 60px;
+}
+
+/* 3m×2m — medium landscape */
+.op-lona-m {
+  width: 150px;
+  height: 100px;
+}
+
+/* 3m×3m — square */
+.op-lona-l {
+  width: 150px;
+  height: 150px;
+}
+
+/* 5m×3m — wide landscape */
+.op-lona-xl {
+  width: 200px;
+  height: 120px;
+}
+
+/* ── PRICE LABEL UNDER EACH VISUAL ──────────────────────────── */
+.op-lona-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 3.2vw, 42px);
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: 1px;
+  transition: color .3s, text-shadow .3s;
+}
+
+.op-lona-price em {
+  font-style: normal;
+  font-size: .55em;
+  color: var(--muted);
+  margin-left: 2px;
+}
+
+.op-lona-card:hover .op-lona-price {
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(220, 38, 38, .4);
+}
+
+/* ── STAGGER ENTRANCE — lona cards ──────────────────────────── */
+.op-lona-card {
+  opacity: 0;
+  animation: op-lona-in .65s cubic-bezier(.22, .68, 0, 1.2) both;
+}
+
+.op-lonas-grid .op-lona-card:nth-child(1) { animation-delay: .10s; }
+.op-lonas-grid .op-lona-card:nth-child(2) { animation-delay: .22s; }
+.op-lonas-grid .op-lona-card:nth-child(3) { animation-delay: .34s; }
+.op-lonas-grid .op-lona-card:nth-child(4) { animation-delay: .46s; }
+
+@keyframes op-lona-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── PREMIUM BANQUILLO BANNER ───────────────────────────────── */
+.op-lona-premium {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 36px 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(220, 38, 38, .4);
+  background: linear-gradient(
+    135deg,
+    rgba(140, 10, 10, .18) 0%,
+    rgba(220, 38, 38, .07) 40%,
+    rgba(12, 8, 8, .6) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: border-color .4s ease, box-shadow .4s ease, transform .4s cubic-bezier(.22, .68, 0, 1.2);
+}
+
+.op-lona-premium:hover {
+  border-color: rgba(220, 38, 38, .85);
+  box-shadow:
+    0 20px 80px rgba(0, 0, 0, .7),
+    0 0 60px rgba(220, 38, 38, .2),
+    inset 0 0 40px rgba(220, 38, 38, .06);
+  transform: translateY(-4px);
+}
+
+/* Pulsing ambient glow in the background */
+.op-lona-premium-glow {
+  position: absolute;
+  top: 50%;
+  left: -80px;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(220, 38, 38, .22) 0%, transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: lona-premium-pulse 3.5s ease-in-out infinite alternate;
+  will-change: opacity, transform;
+}
+
+@keyframes lona-premium-pulse {
+  from {
+    opacity: .6;
+    transform: translateY(-50%) scale(.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+/* Diagonal shimmer line */
+.op-lona-premium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(220, 38, 38, .06) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform .7s ease;
+  pointer-events: none;
+}
+
+.op-lona-premium:hover::before {
+  transform: translateX(100%);
+}
+
+/* Accent top border */
+.op-lona-premium::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(220, 38, 38, .5) 20%,
+    var(--accent) 50%,
+    rgba(220, 38, 38, .5) 80%,
+    transparent 100%
+  );
+  border-radius: 14px 14px 0 0;
+}
+
+/* LEFT content */
+.op-lona-premium-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.op-lona-premium-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(220, 38, 38, .12);
+  border: 1px solid rgba(220, 38, 38, .35);
+  border-radius: 100px;
+  padding: 5px 14px;
+  width: fit-content;
+  animation: badge-glow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes badge-glow {
+  from { box-shadow: 0 0 0 rgba(220, 38, 38, 0); }
+  to   { box-shadow: 0 0 12px rgba(220, 38, 38, .35); }
+}
+
+.op-lona-premium-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(26px, 3.5vw, 46px);
+  color: #fff;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, .6);
+}
+
+.op-lona-premium-sub {
+  font-size: .84rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.op-lona-premium-sub strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* RIGHT content — price */
+.op-lona-premium-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.op-lona-premium-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 7vw, 84px);
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: 2px;
+  text-shadow: 0 0 40px rgba(220, 38, 38, .5);
+  transition: text-shadow .35s;
+}
+
+.op-lona-premium:hover .op-lona-premium-price {
+  text-shadow: 0 0 60px rgba(220, 38, 38, .8), 0 0 100px rgba(220, 38, 38, .4);
+}
+
+.op-lona-premium-price em {
+  font-style: normal;
+  font-size: .45em;
+  color: rgba(220, 38, 38, .7);
+  vertical-align: baseline;
+}
+
+.op-lona-premium-season {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── RESPONSIVE — LONAS ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .op-lonas-inner {
+    padding: 0 28px;
+  }
+
+  .op-lona-premium {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 28px;
+    gap: 20px;
+  }
+
+  .op-lona-premium-right {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .op-lonas-grid {
+    gap: 16px;
+  }
+
+  .op-lona-s  { width: 80px;  height: 40px; }
+  .op-lona-m  { width: 100px; height: 68px; }
+  .op-lona-l  { width: 100px; height: 100px; }
+  .op-lona-xl { width: 134px; height: 80px; }
+
+  .op-lona-premium {
+    padding: 22px 20px;
+  }
+
+  .op-lona-premium-title {
+    font-size: clamp(22px, 6vw, 32px);
+  }
+}
+
+/* ================================================================
+   FINAL CTA SECTION (¿Hablamos?)
+   ================================================================ */
+
+.op-final-cta {
+  display: flex;
+  width: 100%;
+  min-height: 480px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── Left Side (Red overlay + Text) ────────────────────────── */
+.op-final-left {
+  flex: 0 0 65%; /* 65% width */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  overflow: hidden;
+}
+
+/* Background Image */
+.op-final-bg {
+  position: absolute;
+  inset: 0;
+  background: url('assets/_DSC1005.jpg') center 20% / cover no-repeat;
+  filter: saturate(0.8) contrast(1.1);
+  animation: hero-kenburns 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Red Tint Overlay */
+.op-final-overlay {
+  position: absolute;
+  inset: 0;
+  /* Deep red overlay with diagonal pattern similar to reference */
+  background: 
+    linear-gradient(135deg, rgba(200, 20, 20, 0.85) 0%, rgba(140, 10, 10, 0.95) 100%),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(0, 0, 0, 0.05) 10px,
+      rgba(0, 0, 0, 0.05) 20px
+    );
+  mix-blend-mode: multiply; /* Blends red tint nicely with image */
+}
+
+/* Additional red wash for exact color match */
+.op-final-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(220, 38, 38, 0.75); /* Strong red */
+  mix-blend-mode: color;
+}
+
+.op-final-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ── Hero Aesthetic Title ── */
+.op-final-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 10vw, 140px);
+  color: #ffffff;
+  line-height: 0.95;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 0 2px 0 rgba(0,0,0,.9), 0 4px 20px rgba(0,0,0,.8), 0 8px 60px rgba(0,0,0,.5);
+  text-align: left;
+}
+
+.op-final-title span {
+  color: var(--accent);
+  text-shadow: 0 2px 0 rgba(100,0,0,.8), 0 0 40px rgba(220,38,38,.7), 0 0 80px rgba(220,38,38,.4);
+}
+
+
+
+/* ── Right Side (White/Gray + Logo) ────────────────────────── */
+.op-final-right {
+  flex: 0 0 35%; /* 35% width */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: #f4f4f4; /* Light gray base */
+  overflow: hidden;
+}
+
+/* Diagonal stripes background */
+.op-final-right-bg {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #f4f4f4,
+    #f4f4f4 20px,
+    #ebebeb 20px,
+    #ebebeb 40px
+  );
+}
+
+.op-final-logo-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+
+.op-final-logo {
+  width: 180px;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+  transition: transform 0.4s cubic-bezier(0.22, 0.68, 0, 1.2);
+}
+
+.op-final-right:hover .op-final-logo {
+  transform: scale(1.05) translateY(-5px);
+}
+
+.op-final-slogan {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px, 3vw, 32px);
+  color: #1a0505;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .op-final-cta {
+    flex-direction: column;
+  }
+  
+  .op-final-left {
+    flex: none;
+    width: 100%;
+    padding: 80px 30px;
+  }
+  
+  .op-final-right {
+    flex: none;
+    width: 100%;
+    padding: 60px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .op-final-left {
+    padding: 60px 20px;
+  }
+  
+  .op-email-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .op-final-logo {
+    width: 140px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .op-lona-card,
+  .op-lona-premium-glow {
     animation: none;
     opacity: 1;
   }
