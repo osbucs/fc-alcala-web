@@ -177,3 +177,53 @@ window.addEventListener('scroll', () => {
     if (miLightbox.style.display === 'block' && e.key === 'Escape') cerrarLightboxEquipo();
   });
 })();
+
+// ── Mobile Categories Carousel ─────────────────────────────────
+function initMobileCategories() {
+  const grid = document.querySelector('.categories-grid');
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.cat-card'));
+  if (!cards.length) return;
+
+  const isMobile = () => window.innerWidth <= 768;
+
+  function getActiveCard() {
+    const gridRect = grid.getBoundingClientRect();
+    const center = gridRect.left + gridRect.width / 2;
+    let closest = null, minDist = Infinity;
+    cards.forEach(card => {
+      const r = card.getBoundingClientRect();
+      const dist = Math.abs(r.left + r.width / 2 - center);
+      if (dist < minDist) { minDist = dist; closest = card; }
+    });
+    return closest;
+  }
+
+  function updateActive() {
+    if (!isMobile()) {
+      cards.forEach(c => c.classList.remove('mobile-active'));
+      return;
+    }
+    const active = getActiveCard();
+    cards.forEach(c => c.classList.toggle('mobile-active', c === active));
+  }
+
+  function centerFirst() {
+    if (!isMobile()) return;
+    const card = cards[0];
+    grid.scrollLeft = card.offsetLeft - (grid.offsetWidth - card.offsetWidth) / 2;
+    cards[0].classList.add('mobile-active');
+  }
+
+  let scrollTimer;
+  grid.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(updateActive, 60);
+  }, { passive: true });
+
+  centerFirst();
+  updateActive();
+}
+
+initMobileCategories();
+window.addEventListener('resize', initMobileCategories);
