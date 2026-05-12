@@ -27,7 +27,7 @@ header.scrolled{background:rgba(12,8,8,.9);backdrop-filter:blur(16px);border-bot
 .logo{display:flex;align-items:center;gap:12px;font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--text)}
 .logo-img{width:60px;height:auto;border-radius:4px;filter:drop-shadow(0 2px 8px rgba(220,38,38,.3));transition:transform .3s}
 .logo:hover .logo-img{transform:scale(1.08)}
-.logo-text{background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-text{background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0;font-size:inherit;font-weight:inherit;}
 nav.desktop{display:flex;gap:32px;align-items:center}
 nav a{font-size:.85rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--muted);transition:color .2s}
 nav a:hover{color:var(--text)}
@@ -643,28 +643,118 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* SWIPER TEAM GALLERY */
-#team-gallery{background:var(--bg);overflow:hidden;border-top:1px solid var(--border)}
+/* TEAM GALLERY — Glass Scroll */
+#team-gallery{
+  background:var(--bg);
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  padding-bottom:60px;
+}
 .galeria-info{text-align:center;margin-bottom:40px;color:var(--text)}
-.galeria-info p.galeria-subtitulo{display:block;color:var(--accent2);font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:14px;transition:opacity .3s ease}
 .galeria-titulo-torneo span{color:var(--accent)}
 .galeria-cats{display:block;font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,18px);font-weight:600;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:10px}
 .galeria-titulo-torneo{line-height:1;margin-bottom:0}
-.swiper-equipo{width:100%;padding-bottom:56px}
-.swiper-equipo .swiper-slide{width:500px;height:340px;opacity:.38;transition:opacity .35s ease,transform .35s ease;cursor:zoom-in;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border)}
-.swiper-equipo .swiper-slide-active{opacity:1;transform:scale(1.04);box-shadow:0 24px 64px rgba(0,0,0,.7);border:2px solid var(--accent2)}
-.swiper-equipo .swiper-slide img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.swiper-equipo .swiper-slide-active img{transform:scale(1.03)}
-.swiper-equipo .swiper-button-next,.swiper-equipo .swiper-button-prev{color:var(--accent2);transition:color .2s}
-.swiper-equipo .swiper-button-next:hover,.swiper-equipo .swiper-button-prev:hover{color:var(--text)}
-.swiper-equipo .swiper-pagination-bullet{background:var(--muted);opacity:1;transition:background .2s}
-.swiper-equipo .swiper-pagination-bullet-active{background:var(--accent2)}
-/* Team Lightbox — scoped with #mi-lightbox to avoid conflicts with existing #lightbox */
-#mi-lightbox{display:none;position:fixed;z-index:10000;padding-top:50px;left:0;top:0;width:100%;height:100%;background:rgba(12,8,8,.95);backdrop-filter:blur(8px)}
-#mi-lightbox .lightbox-contenido{margin:auto;display:block;max-width:80%;max-height:80vh;border-radius:var(--radius-sm);box-shadow:0 0 60px rgba(220,38,38,.25)}
-#mi-lightbox #lightbox-texto{margin:auto;display:block;width:80%;text-align:center;color:var(--text);padding:15px 0;font-size:1rem;font-weight:500;letter-spacing:.5px}
-#mi-lightbox .lightbox-cerrar{position:absolute;top:30px;right:40px;color:var(--accent2);font-size:40px;font-weight:700;cursor:pointer;transition:color .2s;line-height:1;background:none;border:none}
-#mi-lightbox .lightbox-cerrar:hover{color:var(--text)}
+
+/* Wrapper creates the edge-fade glass effect */
+.tg-wrapper{
+  position:relative;
+  overflow:hidden;
+}
+/* Left fade */
+.tg-wrapper::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:160px;
+  background:linear-gradient(to right, var(--bg) 10%, transparent 100%);
+  z-index:2;
+  pointer-events:none;
+}
+/* Right fade */
+.tg-wrapper::after{
+  content:'';
+  position:absolute;
+  right:0;top:0;bottom:0;
+  width:160px;
+  background:linear-gradient(to left, var(--bg) 10%, transparent 100%);
+  z-index:2;
+  pointer-events:none;
+}
+
+/* Swiper container overrides */
+.swiper-equipo {
+  width: 100%;
+  padding: 30px 0 50px;
+  overflow: visible; /* Prevent glow cropping */
+}
+.swiper-equipo .swiper-wrapper {
+  align-items: center;
+}
+
+/* Glass card — squarer borders */
+.swiper-slide.tg-card{
+  width: 500px;
+  height: 340px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  background: var(--surface2);
+  border: none;
+  /* Inactive: dimmed + shrunk */
+  opacity: .38;
+  transform: scale(0.91);
+  transition:
+    opacity .4s ease,
+    transform .4s cubic-bezier(.22,.68,0,1.2),
+    box-shadow .4s ease;
+}
+
+/* Active card: full + red glass glow */
+.tg-card.swiper-slide-active{
+  opacity: 1;
+  transform: scale(1);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.4),
+    0 20px 60px rgba(0,0,0,.65),
+    0 0 0 1px rgba(220,38,38,.45),
+    0 0 50px rgba(220,38,38,.18),
+    inset 0 0 20px rgba(220,38,38,.15);
+}
+
+.tg-card img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  transition:transform .5s cubic-bezier(.22,.68,0,1.2);
+}
+.tg-card.tg-active img{transform:scale(1.04)}
+
+/* Glassmorphism label overlay — slides up when active */
+.tg-glass{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:16px 24px;
+  background:rgba(12,8,8,.5);
+  backdrop-filter:blur(16px) saturate(1.6);
+  -webkit-backdrop-filter:blur(16px) saturate(1.6);
+  border-top:1px solid rgba(255,255,255,.1);
+  transform:translateY(100%);
+  transition:transform .38s cubic-bezier(.22,.68,0,1.2);
+}
+.tg-card.swiper-slide-active .tg-glass{
+  transform:translateY(0);
+}
+
+.tg-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.2rem;
+  letter-spacing:2px;
+  color:#fff;
+  text-shadow:0 1px 6px rgba(0,0,0,.6);
+}
+
 
 /* RESPONSIVE */
 @media(max-width:1024px){
@@ -691,10 +781,15 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
   .gallery-item.wide{grid-column:span 1}
   .footer-bottom{flex-direction:column;text-align:center}
   .logo-img{width:48px}
+  .logo-long{display:none}
   /* Patrocinio mobile */
   .patrocinio-left-content{padding:48px 32px}
   .patrocinio-right-content{padding:48px 32px}
   .patrocinio-logo{width:min(220px,65%)}
+  /* Team gallery mobile */
+  .swiper-slide.tg-card{width:82vw;max-width:380px;height:260px}
+  .swiper-equipo{padding:20px 0 40px}
+  .tg-wrapper::before,.tg-wrapper::after{width:60px}
 
   /* ── Categories: horizontal snap carousel ─────────── */
   .categories-grid{

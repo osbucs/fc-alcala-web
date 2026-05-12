@@ -7,8 +7,9 @@
   <title>AEC | Alcalá Enjoy Club Deportivo - Sitio Oficial</title>
   <meta name="description"
     content="Sitio oficial de Alcalá Enjoy Club Deportivo (AEC). Inscripciones, categorías, plantel y galería multimedia. #YoTambiénSoySocio" />
-  <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="galeria.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
 </head>
 
@@ -17,8 +18,12 @@
   <!-- HEADER -->
   <header id="site-header">
     <div class="header-inner">
-      <a href="#" class="logo"><img src="assets/logo.png?v=3" alt="AEC Escudo" class="logo-img" /><span
-          class="logo-text">AEC</span></a>
+      <a href="#" class="logo">
+        <img src="assets/logo.png?v=3" alt="AEC Escudo" class="logo-img" />
+        <h1 class="logo-text">
+          <span class="logo-short">AEC</span><span class="logo-long"> | Alcalá Enjoy Club Deportivo</span>
+        </h1>
+      </a>
       <nav class="desktop">
         <a href="#categories">Categorías</a>
         <!-- <a href="#staff">Plantel</a> -->
@@ -298,88 +303,89 @@
     </div>
   </section>
 
-  <!-- GALLERY -->
+  <!-- GALLERY PREVIEW -->
   <section id="gallery">
     <div class="container">
-      <div class="reveal">
-        <span class="section-tag">Multimedia</span>
-        <h2 class="section-title">GALERÍA<br>DEL CLUB</h2>
-        <p class="section-sub">Momentos que quedan en la historia. Haz clic en cualquier imagen para verla en pantalla
-          completa.</p>
+      <div class="gallery-header reveal">
+        <div>
+          <span class="section-tag">Multimedia</span>
+          <h2 class="section-title">GALERÍA DEL CLUB</h2>
+          <p class="section-sub">Momentos que quedan en la historia. El campo, el equipo, la pasión.</p>
+        </div>
+        <a href="galeria.html" class="btn-gallery-full" id="btn-ver-galeria">
+          Ver Galería Completa
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
       </div>
-      <div class="gallery-grid">
-        <div class="gallery-item wide tall reveal" data-src="assets/hero.jpg">
-          <img src="assets/hero.jpg" alt="Equipo en cancha" loading="lazy" />
-          <div class="gallery-overlay">🔍</div>
-        </div>
-        <div class="gallery-item reveal" data-src="assets/coach.jpg">
-          <img src="assets/coach.jpg" alt="Entrenamiento" loading="lazy" />
-          <div class="gallery-overlay">🔍</div>
-        </div>
-        <div class="gallery-item reveal" data-src="assets/player1.jpg">
-          <img src="assets/player1.jpg" alt="Jugador" loading="lazy" />
-          <div class="gallery-overlay">🔍</div>
-        </div>
-        <div class="gallery-item wide reveal" data-src="assets/player2.jpg">
-          <img src="assets/player2.jpg" alt="Partido" loading="lazy" />
-          <div class="gallery-overlay">🔍</div>
-        </div>
-        <div class="gallery-item reveal" data-src="assets/player3.jpg">
-          <img src="assets/player3.jpg" alt="Jugador" loading="lazy" />
-          <div class="gallery-overlay">🔍</div>
-        </div>
+
+      <!-- Mosaic grid -->
+      <div class="gallery-mosaic reveal">
+        <div class="gm-item gm-a"><img src="assets/reunion.jfif" alt="Galería AEC" loading="lazy" /></div>
+        <div class="gm-item gm-b"><img src="assets/_DSC1005.jpg" alt="Galería AEC" loading="lazy" /></div>
+        <div class="gm-item gm-c"><img src="assets/_DSC1258.jpg" alt="Galería AEC" loading="lazy" /></div>
+        <div class="gm-item gm-d"><img src="assets/_DSC1016.jpg" alt="Galería AEC" loading="lazy" /></div>
+        <div class="gm-item gm-e"><img src="assets/_DSC1312.jpg" alt="Galería AEC" loading="lazy" /></div>
+        <div class="gm-item gm-f"><img src="assets/hero_equipo_real.jpg.jpeg" alt="Galería AEC" loading="lazy" /></div>
+        <div class="gm-item gm-g"><img src="assets/_DSC1066.jpg" alt="Galería AEC" loading="lazy" /></div>
+        <div class="gm-item gm-h"><img src="assets/_DSC1405.jpg" alt="Galería AEC" loading="lazy" /></div>
+      </div>
+
+      <div class="gallery-cta-mobile reveal">
+        <a href="galeria.html" class="btn btn-outline" id="btn-ver-galeria-mobile">Ver Galería Completa →</a>
       </div>
     </div>
   </section>
 
-  <!-- LIGHTBOX (galería general) -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-    <button class="lightbox-close" id="lb-close" aria-label="Cerrar">✕</button>
-    <button class="lightbox-prev" id="lb-prev" aria-label="Anterior">‹</button>
-    <img class="lightbox-img" id="lb-img" src="" alt="Imagen ampliada" />
-    <button class="lightbox-next" id="lb-next" aria-label="Siguiente">›</button>
-  </div>
-
-  <!-- TEAM GALLERY (Swiper coverflow) -->
+  <!-- TEAM GALLERY — Glass Scroll -->
   <section id="team-gallery">
     <div class="container">
       <div class="galeria-info reveal">
         <span class="section-tag">28.03.2026</span>
         <h2 class="section-title galeria-titulo-torneo">1er Torneo Ciudad de<br><span>Alcalá la Real</span><small
             class="galeria-cats">(Benjamines / Alevines)</small></h2>
-        <p id="titulo-dinamico" class="galeria-subtitulo">Momentos</p>
       </div>
     </div>
-    <div class="swiper swiper-equipo">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" data-titulo="Atentos al partido">
-          <img src="./assets/_DSC1016.jpg" alt="Atentos al partido" loading="lazy" />
-        </div>
-        <div class="swiper-slide" data-titulo="Jugada maestra">
-          <img src="./assets/_DSC1285.jpg" alt="Jugada maestra" loading="lazy" />
-        </div>
-        <div class="swiper-slide" data-titulo="Celebración">
-          <img src="./assets/_DSC1258.jpg" alt="Celebración" loading="lazy" />
-        </div>
-        <div class="swiper-slide" data-titulo="Unión de Equipo">
-          <img src="./assets/_DSC1005.jpg" alt="Unión de Equipo" loading="lazy" />
-        </div>
-        <div class="swiper-slide" data-titulo="¡A jugar!">
-          <img src="./assets/_DSC1120.jpg" alt="Listos para jugar" loading="lazy" />
+
+    <div class="tg-wrapper">
+      <div class="swiper swiper-equipo">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide tg-card" data-caption="Atentos al partido">
+            <img src="./assets/_DSC1016.jpg" alt="Atentos al partido" loading="lazy" />
+            <div class="tg-glass">
+              <span class="tg-label">Atentos al partido</span>
+            </div>
+          </div>
+          <div class="swiper-slide tg-card" data-caption="Jugada maestra">
+            <img src="./assets/_DSC1285.jpg" alt="Jugada maestra" loading="lazy" />
+            <div class="tg-glass">
+              <span class="tg-label">Jugada maestra</span>
+            </div>
+          </div>
+          <div class="swiper-slide tg-card" data-caption="Celebración">
+            <img src="./assets/_DSC1258.jpg" alt="Celebración" loading="lazy" />
+            <div class="tg-glass">
+              <span class="tg-label">Celebración</span>
+            </div>
+          </div>
+          <div class="swiper-slide tg-card" data-caption="Unión de Equipo">
+            <img src="./assets/_DSC1005.jpg" alt="Unión de Equipo" loading="lazy" />
+            <div class="tg-glass">
+              <span class="tg-label">Unión de Equipo</span>
+            </div>
+          </div>
+          <div class="swiper-slide tg-card" data-caption="¡A jugar!">
+            <img src="./assets/_DSC1120.jpg" alt="Listos para jugar" loading="lazy" />
+            <div class="tg-glass">
+              <span class="tg-label">¡A jugar!</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
     </div>
   </section>
-
-  <!-- LIGHTBOX del equipo (Swiper) -->
-  <div id="mi-lightbox" class="lightbox-contenedor" role="dialog" aria-modal="true">
-    <button class="lightbox-cerrar" id="btn-cerrar-lb" aria-label="Cerrar">&times;</button>
-    <img class="lightbox-contenido" id="img-ampliada" src="" alt="Imagen ampliada" />
-    <div id="lightbox-texto"></div>
-  </div>
 
 
   <!-- FAQ (deshabilitado temporalmente)
@@ -466,7 +472,7 @@
     <div class="footer-main">
       <a href="index.html" class="footer-logo" aria-label="AEC — Alcalá Enjoy Club Deportivo">
         <img src="assets/logo.png?v=3" alt="AEC Escudo" class="logo-img" />
-        <span class="logo-text">AEC</span>
+        <span class="logo-text">Alcalá Enjoy Club</span>
       </a>
       <div class="footer-tagline">
         <p>Alcalá Enjoy Club Deportivo — Formando campeones desde 2013.</p>
@@ -510,6 +516,7 @@
         d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.525 5.845L0 24l6.335-1.505A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 01-5.006-1.371l-.36-.214-3.722.884.938-3.63-.235-.373A9.79 9.79 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z" />
     </svg>
   </a>
+
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="main.js"></script>
