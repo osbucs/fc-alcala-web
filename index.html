@@ -38,6 +38,11 @@
             <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
           </svg>
         </a>
+        <a href="https://www.facebook.com/share/18jVhCxvnm/?mibextid=wwXIfr" target="_blank" class="nav-fb" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -50,6 +55,7 @@
       <a href="#gallery">Galería</a>
 
       <a href="https://www.instagram.com/cdalcalaenjoyautocoche?igsh=cjY1NmN0ZHd2cjRi" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/18jVhCxvnm/?mibextid=wwXIfr" target="_blank">Facebook</a>
     </div>
   </header>
 
@@ -111,117 +117,187 @@
         <p class="section-sub">Tenemos un lugar para cada jugador, sin importar la edad. Encuentra tu categoría y
           empieza a entrenar.</p>
       </div>
-      <div class="categories-grid">
+      <div class="cat-accordion reveal">
         <!-- Pre Benjamín -->
-        <div class="cat-card reveal">
-          <div class="cat-header">
-            <div class="cat-icon">🍼</div>
-            <div class="cat-age">PRE BENJAMÍN</div>
+        <div class="ca-panel" data-index="01">
+          <div class="ca-bg"><img src="assets/pequeñines.jpg" loading="lazy" alt="Pre Benjamín"></div>
+          <div class="ca-collapsed">
+            <span class="ca-num">01</span>
+            <span class="ca-vtitle">PRE BENJAMÍN</span>
           </div>
-          <div class="cat-name">Pre Benjamín</div>
-          <p style="color:var(--muted);font-size:.85rem;line-height:1.6">Primeros pasos en el fútbol. Jugamos,
-            aprendemos y nos divertimos juntos en un ambiente 100% formativo.</p>
-          <div class="cat-schedule">
-            <div class="schedule-row"><span class="schedule-day">Lunes / Miércoles</span><span
-                class="schedule-time">4:00 PM</span></div>
-            <div class="schedule-row"><span class="schedule-day">Sábado</span><span class="schedule-time">9:00 AM</span>
+          <div class="ca-expanded">
+            <div class="ca-exp-top">
+              <span class="ca-exp-num">01</span>
+            </div>
+            <h3 class="ca-exp-title">PRE BENJAMÍN</h3>
+            <div class="ca-age-bar">
+              <span class="ca-age-label">5 – 7 años</span>
+              <div class="ca-bar-track">
+                <div class="ca-bar-fill" style="width:14%"></div>
+              </div>
+            </div>
+            <p class="ca-desc">Primeros pasos en el fútbol. Jugamos, aprendemos y nos divertimos juntos en un ambiente
+              100% formativo.</p>
+            <div class="ca-tag-row">
+              <span class="ca-tag">Formativo</span>
+              <span class="ca-tag">Mixto</span>
             </div>
           </div>
         </div>
         <!-- Benjamín -->
-        <div class="cat-card reveal">
-          <div class="cat-header">
-            <div class="cat-icon">👦</div>
-            <div class="cat-age">BENJAMÍN</div>
+        <div class="ca-panel" data-index="02">
+          <div class="ca-bg"><img src="assets/_DSC1016.jpg" loading="lazy" alt="Benjamín"></div>
+          <div class="ca-collapsed">
+            <span class="ca-num">02</span>
+            <span class="ca-vtitle">BENJAMÍN</span>
           </div>
-          <div class="cat-name">Benjamín</div>
-          <p style="color:var(--muted);font-size:.85rem;line-height:1.6">Desarrollamos fundamentos técnicos y trabajo en
-            equipo en una etapa clave del crecimiento futbolístico.</p>
-          <div class="cat-schedule">
-            <div class="schedule-row"><span class="schedule-day">Martes / Jueves</span><span class="schedule-time">4:00
-                PM</span></div>
-            <div class="schedule-row"><span class="schedule-day">Sábado</span><span class="schedule-time">9:30 AM</span>
+          <div class="ca-expanded">
+            <div class="ca-exp-top">
+              <span class="ca-exp-num">02</span>
+            </div>
+            <h3 class="ca-exp-title">BENJAMÍN</h3>
+            <div class="ca-age-bar">
+              <span class="ca-age-label">8 – 9 años</span>
+              <div class="ca-bar-track">
+                <div class="ca-bar-fill" style="width:28%"></div>
+              </div>
+            </div>
+            <p class="ca-desc">Desarrollamos fundamentos técnicos y trabajo en equipo en una etapa clave del crecimiento
+              futbolístico.</p>
+            <div class="ca-tag-row">
+              <span class="ca-tag">Técnica</span>
+              <span class="ca-tag">Equipo</span>
             </div>
           </div>
         </div>
         <!-- Alevín -->
-        <div class="cat-card reveal">
-          <div class="cat-header">
-            <div class="cat-icon">🧒</div>
-            <div class="cat-age">ALEVÍN</div>
+        <div class="ca-panel" data-index="03">
+          <div class="ca-bg"><img src="assets/_DSC1415.jpg" loading="lazy" alt="Alevín"></div>
+          <div class="ca-collapsed">
+            <span class="ca-num">03</span>
+            <span class="ca-vtitle">ALEVÍN</span>
           </div>
-          <div class="cat-name">Alevín</div>
-          <p style="color:var(--muted);font-size:.85rem;line-height:1.6">Iniciación táctica y consolidación técnica.
-            Competición local y torneos regionales con enfoque educativo.</p>
-          <div class="cat-schedule">
-            <div class="schedule-row"><span class="schedule-day">Lunes / Miércoles</span><span
-                class="schedule-time">4:30 PM</span></div>
-            <div class="schedule-row"><span class="schedule-day">Sábado</span><span class="schedule-time">10:00
-                AM</span></div>
+          <div class="ca-expanded">
+            <div class="ca-exp-top">
+              <span class="ca-exp-num">03</span>
+            </div>
+            <h3 class="ca-exp-title">ALEVÍN</h3>
+            <div class="ca-age-bar">
+              <span class="ca-age-label">10 – 11 años</span>
+              <div class="ca-bar-track">
+                <div class="ca-bar-fill" style="width:42%"></div>
+              </div>
+            </div>
+            <p class="ca-desc">Iniciación táctica y consolidación técnica. Competición local y torneos regionales con
+              enfoque educativo.</p>
+            <div class="ca-tag-row">
+              <span class="ca-tag">Táctica</span>
+              <span class="ca-tag">Regional</span>
+            </div>
           </div>
         </div>
         <!-- Infantil -->
-        <div class="cat-card reveal">
-          <div class="cat-header">
-            <div class="cat-icon">🏃</div>
-            <div class="cat-age">INFANTIL</div>
+        <div class="ca-panel" data-index="04">
+          <div class="ca-bg"><img src="assets/_DSC1258.jpg" loading="lazy" alt="Infantil"></div>
+          <div class="ca-collapsed">
+            <span class="ca-num">04</span>
+            <span class="ca-vtitle">INFANTIL</span>
           </div>
-          <div class="cat-name">Infantil</div>
-          <p style="color:var(--muted);font-size:.85rem;line-height:1.6">Etapa de consolidación. Mayor exigencia
-            táctica, preparación física y participación en ligas oficiales.</p>
-          <div class="cat-schedule">
-            <div class="schedule-row"><span class="schedule-day">Martes / Jueves</span><span class="schedule-time">5:00
-                PM</span></div>
-            <div class="schedule-row"><span class="schedule-day">Sábado</span><span class="schedule-time">10:30
-                AM</span></div>
+          <div class="ca-expanded">
+            <div class="ca-exp-top">
+              <span class="ca-exp-num">04</span>
+            </div>
+            <h3 class="ca-exp-title">INFANTIL</h3>
+            <div class="ca-age-bar">
+              <span class="ca-age-label">12 – 13 años</span>
+              <div class="ca-bar-track">
+                <div class="ca-bar-fill" style="width:56%"></div>
+              </div>
+            </div>
+            <p class="ca-desc">Etapa de consolidación. Mayor exigencia táctica, preparación física y participación en
+              ligas oficiales.</p>
+            <div class="ca-tag-row">
+              <span class="ca-tag">Competición</span>
+              <span class="ca-tag">Liga Oficial</span>
+            </div>
           </div>
         </div>
         <!-- Cadete -->
-        <div class="cat-card reveal">
-          <div class="cat-header">
-            <div class="cat-icon">⚡</div>
-            <div class="cat-age">CADETE</div>
+        <div class="ca-panel" data-index="05">
+          <div class="ca-bg"><img src="assets/_DSC1005.jpg" loading="lazy" alt="Cadete"></div>
+          <div class="ca-collapsed">
+            <span class="ca-num">05</span>
+            <span class="ca-vtitle">CADETE</span>
           </div>
-          <div class="cat-name">Cadete</div>
-          <p style="color:var(--muted);font-size:.85rem;line-height:1.6">Alta competición y formación integral.
-            Preparación física especializada y análisis de rendimiento individual.</p>
-          <div class="cat-schedule">
-            <div class="schedule-row"><span class="schedule-day">Lun / Mié / Vie</span><span class="schedule-time">5:30
-                PM</span></div>
-            <div class="schedule-row"><span class="schedule-day">Sábado</span><span class="schedule-time">8:00 AM</span>
+          <div class="ca-expanded">
+            <div class="ca-exp-top">
+              <span class="ca-exp-num">05</span>
+            </div>
+            <h3 class="ca-exp-title">CADETE</h3>
+            <div class="ca-age-bar">
+              <span class="ca-age-label">14 – 15 años</span>
+              <div class="ca-bar-track">
+                <div class="ca-bar-fill" style="width:68%"></div>
+              </div>
+            </div>
+            <p class="ca-desc">Alta competición y formación integral. Preparación física especializada y análisis de
+              rendimiento individual.</p>
+            <div class="ca-tag-row">
+              <span class="ca-tag">Alta Comp.</span>
+              <span class="ca-tag">Rendimiento</span>
             </div>
           </div>
         </div>
         <!-- Juvenil -->
-        <div class="cat-card reveal">
-          <div class="cat-header">
-            <div class="cat-icon">🔥</div>
-            <div class="cat-age">JUVENIL</div>
+        <div class="ca-panel" data-index="06">
+          <div class="ca-bg"><img src="assets/_DSC1148.jpg" loading="lazy" alt="Juvenil"></div>
+          <div class="ca-collapsed">
+            <span class="ca-num">06</span>
+            <span class="ca-vtitle">JUVENIL</span>
           </div>
-          <div class="cat-name">Juvenil</div>
-          <p style="color:var(--muted);font-size:.85rem;line-height:1.6">El paso hacia el fútbol adulto. Máxima
-            exigencia, torneos departamentales y preparación para semiprofesional.</p>
-          <div class="cat-schedule">
-            <div class="schedule-row"><span class="schedule-day">Lun / Mié / Vie</span><span class="schedule-time">6:00
-                PM</span></div>
-            <div class="schedule-row"><span class="schedule-day">Domingo</span><span class="schedule-time">7:00
-                AM</span></div>
+          <div class="ca-expanded">
+            <div class="ca-exp-top">
+              <span class="ca-exp-num">06</span>
+            </div>
+            <h3 class="ca-exp-title">JUVENIL</h3>
+            <div class="ca-age-bar">
+              <span class="ca-age-label">16 – 18 años</span>
+              <div class="ca-bar-track">
+                <div class="ca-bar-fill" style="width:82%"></div>
+              </div>
+            </div>
+            <p class="ca-desc">El paso hacia el fútbol adulto. Máxima exigencia, torneos departamentales y preparación
+              para semiprofesional.</p>
+            <div class="ca-tag-row">
+              <span class="ca-tag">Semipro</span>
+              <span class="ca-tag">Departamental</span>
+            </div>
           </div>
         </div>
         <!-- Senior -->
-        <div class="cat-card reveal">
-          <div class="cat-header">
-            <div class="cat-icon">🌟</div>
-            <div class="cat-age">SENIOR</div>
+        <div class="ca-panel" data-index="07">
+          <div class="ca-bg"><img src="assets/hero_equipo_real.jpg.jpeg" loading="lazy" alt="Senior"></div>
+          <div class="ca-collapsed">
+            <span class="ca-num">07</span>
+            <span class="ca-vtitle">SENIOR</span>
           </div>
-          <div class="cat-name">Senior</div>
-          <p style="color:var(--muted);font-size:.85rem;line-height:1.6">Fútbol de adultos con toda la estructura del
-            club. Ligas locales, regionales y torneos nacionales.</p>
-          <div class="cat-schedule">
-            <div class="schedule-row"><span class="schedule-day">Mar / Jue</span><span class="schedule-time">7:30
-                PM</span></div>
-            <div class="schedule-row"><span class="schedule-day">Domingo</span><span class="schedule-time">10:00
-                AM</span></div>
+          <div class="ca-expanded">
+            <div class="ca-exp-top">
+              <span class="ca-exp-num">07</span>
+            </div>
+            <h3 class="ca-exp-title">SENIOR</h3>
+            <div class="ca-age-bar">
+              <span class="ca-age-label">18+ años</span>
+              <div class="ca-bar-track">
+                <div class="ca-bar-fill" style="width:100%"></div>
+              </div>
+            </div>
+            <p class="ca-desc">Fútbol de adultos con toda la estructura del club. Ligas locales, regionales y torneos
+              nacionales.</p>
+            <div class="ca-tag-row">
+              <span class="ca-tag">Liga Nacional</span>
+              <span class="ca-tag">Élite</span>
+            </div>
           </div>
         </div>
       </div>
@@ -368,6 +444,11 @@
             <rect x="2" y="2" width="20" height="20" rx="5" />
             <circle cx="12" cy="12" r="4" />
             <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/share/18jVhCxvnm/?mibextid=wwXIfr" target="_blank" class="socialContainer containerFb" aria-label="Facebook">
+          <svg class="socialSvg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
           </svg>
         </a>
         <a href="https://wa.me/+34602210050" target="_blank" class="socialContainer containerFour"
