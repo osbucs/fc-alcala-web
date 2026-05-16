@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "fc-alcala-web1",
+  "name": "fc-alcala-web",
   "compatibility_date": "2026-05-16",
   "observability": {
     "enabled": true
