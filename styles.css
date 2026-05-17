@@ -724,9 +724,10 @@ nav a:hover {
 
 .cat-accordion {
   display: flex;
+  flex-direction: column;
   gap: 0;
   margin-top: 64px;
-  height: 420px;
+  height: 600px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -739,10 +740,13 @@ nav a:hover {
 .cat-accordion::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 60%; /* Only covers the right side to avoid aggressive clipping */
   background:
-    linear-gradient(to right, rgba(20, 16, 16, 1) 0%, rgba(20, 16, 16, 0.8) 35%, rgba(20, 16, 16, 0.2) 60%, rgba(20, 16, 16, 0.7) 100%),
-    url('assets/_DSC1055.jpg') center/cover no-repeat;
+    linear-gradient(to right, rgba(20, 16, 16, 1) 0%, rgba(20, 16, 16, 0.4) 30%, rgba(20, 16, 16, 0.2) 65%, rgba(20, 16, 16, 0.7) 100%),
+    url('assets/_DSC1055.jpg') 20% center / cover no-repeat;
   z-index: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;
@@ -754,7 +758,7 @@ nav a:hover {
   white-space: pre-wrap;
   position: absolute;
   top: 50%;
-  right: 8%;
+  right: 6%;
   transform: translateY(-50%);
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(48px, 6vw, 84px);
@@ -768,53 +772,45 @@ nav a:hover {
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
 }
 
-/* Fade out photo and text when ANY panel is hovered */
-.cat-accordion:has(.ca-panel:hover)::before {
-  opacity: 0;
-}
-
-.cat-accordion:has(.ca-panel:hover)::after {
-  opacity: 0;
-  transform: translateY(-50%) translateX(30px);
-}
-
 /* each panel */
 .ca-panel {
   position: relative;
-  flex: 0 0 68px;
-  /* collapsed width */
+  width: 55%;
+  flex: 1;
+  /* evenly distributed height */
   overflow: hidden;
   cursor: pointer;
   transition:
     flex .55s cubic-bezier(.77, 0, .18, 1),
     background .35s;
+  border-bottom: 1px solid var(--border);
   border-right: 1px solid var(--border);
   display: flex;
   z-index: 1;
 }
 
 .ca-panel:last-child {
-  border-right: none
+  border-bottom: none;
 }
 
-/* top accent line — hidden by default */
+/* left accent line — hidden by default */
 .ca-panel::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 3px;
+  bottom: 0;
+  width: 4px;
   background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
+  transform: scaleY(0);
+  transform-origin: top;
   transition: transform .45s cubic-bezier(.77, 0, .18, 1);
   z-index: 3
 }
 
 .ca-panel:hover::before,
 .ca-panel.ca-active::before {
-  transform: scaleX(1)
+  transform: scaleY(1)
 }
 
 /* Background Image */
@@ -829,7 +825,7 @@ nav a:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(12, 8, 8, 0.3) 0%, rgba(12, 8, 8, 0.85) 100%);
+  background: linear-gradient(to right, rgba(12, 8, 8, 0.85) 0%, rgba(12, 8, 8, 0.2) 100%);
 }
 
 .ca-bg img {
@@ -847,7 +843,7 @@ nav a:hover {
 /* EXPANDED state */
 .ca-panel:hover,
 .ca-panel.ca-active {
-  flex: 1;
+  flex: 0 0 280px;
   background: var(--surface2)
 }
 
@@ -856,10 +852,11 @@ nav a:hover {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  padding: 28px 0;
+  justify-content: flex-start;
+  padding: 0 32px;
+  gap: 24px;
   transition: opacity .25s;
   z-index: 2;
   pointer-events: none
@@ -873,7 +870,7 @@ nav a:hover {
 
 .ca-num {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 16px;
+  font-size: 24px;
   letter-spacing: 3px;
   color: var(--accent);
   opacity: 1;
@@ -882,14 +879,12 @@ nav a:hover {
 
 .ca-vtitle {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(15px, 1.5vw, 18px);
+  font-size: clamp(20px, 2vw, 26px);
   letter-spacing: 4px;
-  color: var(--muted);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
-  white-space: nowrap;
   color: #fff;
+  writing-mode: horizontal-tb;
+  transform: none;
+  white-space: nowrap;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
@@ -897,10 +892,10 @@ nav a:hover {
 .ca-expanded {
   position: absolute;
   inset: 0;
-  padding: 36px 36px 32px;
+  padding: 24px 36px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   opacity: 0;
   transform: translateX(12px);
   transition:
@@ -921,12 +916,12 @@ nav a:hover {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 12px
+  margin-bottom: 4px;
 }
 
 .ca-exp-num {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(48px, 5vw, 72px);
+  font-size: clamp(36px, 4vw, 56px);
   line-height: 1;
   color: rgba(220, 38, 38, .18);
   letter-spacing: -1px;
@@ -935,11 +930,11 @@ nav a:hover {
 
 .ca-exp-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(22px, 2.4vw, 32px);
+  font-size: clamp(24px, 2.6vw, 36px);
   letter-spacing: 2px;
   color: var(--text);
   line-height: 1;
-  margin-bottom: 16px
+  margin-bottom: 12px;
 }
 
 /* Age progress bar */
@@ -980,29 +975,28 @@ nav a:hover {
 }
 
 .ca-desc {
-  font-size: clamp(.78rem, .9vw, .88rem);
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
   color: var(--muted);
-  line-height: 1.65;
-  flex: 1;
-  margin-bottom: 16px
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
 /* Tags */
 .ca-tag-row {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap
 }
 
 .ca-tag {
-  font-size: .68rem;
+  font-size: .75rem;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--text);
   background: rgba(220, 38, 38, .14);
   border: 1px solid rgba(220, 38, 38, .3);
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 100px;
   white-space: nowrap
 }
@@ -2037,6 +2031,7 @@ footer::after {
   }
 
   .ca-panel {
+    width: 100%;
     flex: 0 0 56px;
     border-right: none;
     border-bottom: 1px solid var(--border);
