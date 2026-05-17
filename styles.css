@@ -2084,3 +2084,34 @@ footer::after {
     grid-template-columns: 1fr 1fr
   }
 }
+
+/* ── Pantallas grandes y Monitores 4K ── */
+@media(min-width:1600px) {
+  .container, .header-inner {
+    max-width: 1536px;
+  }
+  .cat-accordion {
+    height: 700px;
+  }
+  .ca-panel:hover, .ca-panel.ca-active {
+    flex: 0 0 320px;
+  }
+  .ca-collapsed {
+    padding: 0 40px;
+  }
+}
+
+@media(min-width:2560px) {
+  .container, .header-inner {
+    max-width: 2000px;
+  }
+  .cat-accordion {
+    height: 900px;
+  }
+  .ca-panel:hover, .ca-panel.ca-active {
+    flex: 0 0 420px;
+  }
+  .ca-collapsed {
+    padding: 0 60px;
+  }
+}
