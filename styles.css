@@ -74,9 +74,8 @@ header.scrolled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px
+  width: 100%;
+  padding: 0 4vw;
 }
 
 .logo {
@@ -2087,7 +2086,7 @@ footer::after {
 
 /* ── Pantallas grandes y Monitores 4K ── */
 @media(min-width:1600px) {
-  .container, .header-inner {
+  .container, .hero-content {
     max-width: 1536px;
   }
   .cat-accordion {
@@ -2102,7 +2101,7 @@ footer::after {
 }
 
 @media(min-width:2560px) {
-  .container, .header-inner {
+  .container, .hero-content {
     max-width: 2000px;
   }
   .cat-accordion {
