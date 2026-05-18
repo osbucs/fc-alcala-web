@@ -742,7 +742,8 @@ nav a:hover {
   top: 0;
   bottom: 0;
   right: 0;
-  width: 60%; /* Only covers the right side to avoid aggressive clipping */
+  width: 60%;
+  /* Only covers the right side to avoid aggressive clipping */
   background:
     linear-gradient(to right, rgba(20, 16, 16, 1) 0%, rgba(20, 16, 16, 0.4) 30%, rgba(20, 16, 16, 0.2) 65%, rgba(20, 16, 16, 0.7) 100%),
     url('assets/_DSC1055.jpg') 20% center / cover no-repeat;
@@ -834,9 +835,26 @@ nav a:hover {
   filter: grayscale(30%) contrast(1.1);
 }
 
+/* Ajustes de encuadre específicos para cada categoría en estado colapsado */
+.ca-panel[data-index="03"] .ca-bg img {
+  object-position: center 37%
+}
+
+.ca-panel[data-index="04"] .ca-bg img {
+  object-position: center 27%
+}
+
+.ca-panel[data-index="05"] .ca-bg img {
+  object-position: center 10%;
+}
+
+.ca-panel[data-index="07"] .ca-bg img {
+  object-position: center 60%;
+}
+
 .ca-panel:hover .ca-bg,
 .ca-panel.ca-active .ca-bg {
-  opacity: 0;
+  opacity: 0.17;
 }
 
 /* EXPANDED state */
@@ -2086,30 +2104,42 @@ footer::after {
 
 /* ── Pantallas grandes y Monitores 4K ── */
 @media(min-width:1600px) {
-  .container, .hero-content {
+
+  .container,
+  .hero-content {
     max-width: 1536px;
   }
+
   .cat-accordion {
     height: 700px;
   }
-  .ca-panel:hover, .ca-panel.ca-active {
+
+  .ca-panel:hover,
+  .ca-panel.ca-active {
     flex: 0 0 320px;
   }
+
   .ca-collapsed {
     padding: 0 40px;
   }
 }
 
 @media(min-width:2560px) {
-  .container, .hero-content {
+
+  .container,
+  .hero-content {
     max-width: 2000px;
   }
+
   .cat-accordion {
     height: 900px;
   }
-  .ca-panel:hover, .ca-panel.ca-active {
+
+  .ca-panel:hover,
+  .ca-panel.ca-active {
     flex: 0 0 420px;
   }
+
   .ca-collapsed {
     padding: 0 60px;
   }
