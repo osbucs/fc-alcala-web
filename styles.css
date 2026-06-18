@@ -726,7 +726,7 @@ nav a:hover {
   flex-direction: column;
   gap: 0;
   margin-top: 64px;
-  height: 600px;
+  height: 680px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -832,24 +832,41 @@ nav a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   filter: grayscale(30%) contrast(1.1);
 }
 
-/* Ajustes de encuadre específicos para cada categoría en estado colapsado */
+/* Ajustes de encuadre específicos para cada categoría */
+.ca-panel[data-index="01"] .ca-bg img {
+  object-position: center 50%;
+}
+
+.ca-panel[data-index="02"] .ca-bg img {
+  object-position: center 50%;
+}
+
 .ca-panel[data-index="03"] .ca-bg img {
-  object-position: center 37%
+  object-position: center 50%;
 }
 
 .ca-panel[data-index="04"] .ca-bg img {
-  object-position: center 27%
+  object-position: center 20%;
 }
 
 .ca-panel[data-index="05"] .ca-bg img {
-  object-position: center 10%;
+  object-position: center 15%;
+}
+
+.ca-panel[data-index="06"] .ca-bg img {
+  object-position: center 18%;
 }
 
 .ca-panel[data-index="07"] .ca-bg img {
-  object-position: center 60%;
+  object-position: center 30%;
+}
+
+.ca-panel[data-index="08"] .ca-bg img {
+  object-position: center 70%;
 }
 
 .ca-panel:hover .ca-bg,
